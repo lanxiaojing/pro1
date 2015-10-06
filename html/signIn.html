@@ -34,7 +34,7 @@
             <h2 class="text-info "><a href="signUp.html" >登录</a><span>&nbsp;·&nbsp;</span><a class="active" href="#">注册</a></h2>
             <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
         </div>
-        <form class="form-horizontal" id="signInForm" name="signInForm" action="#" method="post">
+        <form class="form-horizontal" id="signInForm" name="signInForm" action="../php/SignIn.php" method="post">
             <div class="row sign" >
                 <div class="col-md-offset-4 col-md-4">
                     <div class="input-group input-group-lg">
@@ -170,7 +170,9 @@
                 }
                 else{
                     var errormsg = '该用户名已被注册！';
-                    $(this).parents('.sign').append(" <div class='col-md-4 userconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errormsg+"</h5></div>");
+                    /*$(this).parents('.sign').append(" <div class='col-md-4 userconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errormsg+"</h5></div>");*/
+                    //上面这句有问题
+                    alert(errormsg);
                     u_n = 1;
                 }
             }
