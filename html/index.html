@@ -104,53 +104,15 @@
 	</div>
 	
 
-	
-
-
-<!-- 	// <script type="text/javascript" src="js/tabs.js"></script>
-	// <script type="text/javascript" src="js/showList.js"></script> -->
-
 	<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-	<!--<script type="text/javascript" src="../js/template-native.js"></script>-->
-
-	<!--<script type="text/html" id="tabinner">-->
-		<!--<%for(i=0;i<data.username.length;i++){%>-->
-		<!--<div class="media" style="margin: 20px;">-->
-			<!--<div class="media-left">-->
-				<!--<a href="#"><img class="img-circle img-responsive" style="width: 50px;height: 50px" src="<%=#data.userimg[i]%>"></a>-->
-			<!--</div>-->
-			<!--<div class="media-body">-->
-				<!--<div class="media-heading"><a href="#"><%=data.username[i]%></a><button type="button" class="btn btn-xs btn-info pull-right">加关注</button></div>-->
-				<!--<p><%=word[i]%></p>-->
-				<!--<div class="center-block">-->
-					<!--&lt;!&ndash;<% include(imgin,imgout)%>&ndash;&gt;-->
-					<!--<%for(j=0;j<imgout.length;j++){%>-->
-					<!--<img style="width: 30%;height:auto;" src="<%=imgurl[j]%>">-->
-					<!--<%}%>-->
-				<!--</div>-->
-			<!--</div>-->
-		<!--</div>-->
-		<!--<div style="margin: 50px 0px; border: solid grey 1px;opacity: 0.5; height: 1px"></div>-->
-		<!--<%}%>-->
-	<!--</script>-->
-	<!--&lt;!&ndash;<script type="text/html" id="imgin">&ndash;&gt;-->
-		<!--&lt;!&ndash; &ndash;&gt;-->
-	<!--&lt;!&ndash;</script>&ndash;&gt;-->
+    <script type="text/javascript" src="../js/index.js"></script>
 	<script type="text/javascript">
 
-        //此处要做函数封装输出的方法方便后面调用
         function ShowHot(data){
             //需要的数据
-            /*var data={
-             "userimg":["X","Y"],  //这里少留了个用户头像的接口，我会传二进制的图片给你，你看看怎么解析
-             "username":["x","y"],//用户姓名
-             "imgurl":["XXX,XX,X,kk,jjj,hhh","YYY,YY"],//用户上传的图片
-             "word":["XX","UU"]//描述
-             }*/
             var index,
             html = '';
-
             for(i=0;i<data.username.length;i++){
                 html += "<div class='media' style='margin: 20px;'>"
                 + "<div class='media-left'>"
@@ -185,9 +147,6 @@
             document.getElementById("hot").innerHTML=html;
         }
 
-        //hot标签下数据接口
-        //1.Ajax提出请求或者jquery$.get方法请求HotNews.php（也就是变量phpUrl）
-        //原生ajax
         function HotNewsFunAjax(phpUrl){
             var xmlhttp;
             if(window.XMLHttpRequest){
@@ -210,29 +169,6 @@
             xmlhttp.send();
             return 1;
         }
-        //jquery的ajax
-        function HotNewsFunJquery(phpUrl) {
-            $.ajax({
-                url: phpUrl + "?tm=" + Math.random(),
-                async: "ture",
-                type: "post",
-                success: function (data) {
-                    //此处data就是返回的值，在这里执行回调函数内容，也就是插入数据到前台页面的操作
-                    //想一想有没有别的方法能让HotnewsFunJquery函数之外获得这个返回值
-                }
-            });}
-        //jquery的$._get方法
-        function HotNewsFunGet(phpUrl) {
-            $.post(phpUrl+"?t=" + Math.random(),
-                    function(data){
-                        //此处data就是返回的值，在这里执行回调函数内容，也就是插入数据到前台页面的操作
-                        //想一想有没有别的方法能让HotnewsFunGet函数之外获得这个返回值
-                    }
-            );
-        }
-
-
-        //以原生Ajax为例子实现
         var hot=HotNewsFunAjax("../php/HotNews.php");
 
 
