@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" >
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-expanded="false">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.html" class="navbar-brand">logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <div class="navbar-brand pull-right">
+                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="page-header text-center">
+            <h2 class="text-info "><a href="#" id="signUp" class="active">登录</a><span>&nbsp;·&nbsp;</span><a id="signIn" href="signIn.html">注册</a></h2>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+        </div>
+        <form class="form-horizontal" action="#" method="post">
+            <div class="row sign" >
+                <div class="col-xs-offset-4 col-xs-4">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="userIcon" aria-hidden="true"> <i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" id="userName" name="userName" aria-describedby="userIcon" type="text" placeholder="用户名">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sign" >
+                <div class="col-xs-offset-4 col-xs-4">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="pwdIcon" aria-hidden="true"> <i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" id="passwords" name="passwords" aria-describedby="pwdIcon" type="password" placeholder="密码">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row signbtn">
+                <div class="col-xs-offset-4 col-xs-4">
+                       <button id="subbtn"  class="btn btn-success btn-lg btn-block" type="button">登&nbsp;&nbsp;录</button>
+                </div>
+            </div>
+
+            <div class="row sign">
+                <div class="col-xs-offset-4 col-xs-4">
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="remenberMe">记住我</label>
+                        <a href="#" class="pull-right">忘记密码？</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer>
+    </footer>
+</div>
+
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+<script>
+    var u_n=0,p_n=0;
+    $("#userName").focus(function(){
+        if(u_n!=1){
+        }else{
+            $(this).val("");
+            $(".userconb").remove();
+            u_n = 0;
+        }
+    }).blur(function(){
+        if(this.value==""||  this.value.length>18  ){
+            if($(".userconb").length){}
+            else{
+                var errorMsg = '用户名在1~18位之间';
+                $(this).parents('.sign').append(" <div class='col-md-4 userconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errorMsg+"</h5></div>");
+            }
+            u_n = 1;
+        }
+        else{
+            u_n=3;
+        }
+    });
+    $("#passwords").focus(function(){
+        if(p_n!=1){
+        }else{
+            $(this).val("");
+            $(".pwdconb").remove();
+            p_n = 0;
+        }
+    }).blur(function(){
+        if(this.value==""|| ( this.value.length<6 ) ){
+            if($(".pwdconb").length){}
+            else{
+                var errorMsg = '密码至少是6位';
+                $(this).parents('.sign').append(" <div class='col-md-4 pwdconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errorMsg+"</h5></div>");
+            }
+            p_n = 1;
+        }
+        else{
+            p_n=3;
+        }
+    });
+    $("#subbtn").click(function() {
+        if (u_n == 3 && p_n == 3) {
+            $("form").submit();
+            $(this).disabled = true;
+        }
+        else{
+            alert( '表单验证未通过！');
+            return false;
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" >
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-expanded="false">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.html" class="navbar-brand">logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <div class="navbar-brand pull-right">
+                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="page-header text-center">
+            <h2 class="text-info "><a href="signUp.html" >登录</a><span>&nbsp;·&nbsp;</span><a class="active" href="#">注册</a></h2>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+        </div>
+        <form class="form-horizontal" id="signInForm" name="signInForm" action="#" method="post">
+            <div class="row sign" >
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="EmailIcon" aria-hidden="true"> <i class="glyphicon glyphicon-envelope"></i></span>
+                        <input class="form-control" id="Email" name="Email" aria-describedby="EmailIcon" type="email" placeholder="您的邮箱">
+                    </div>
+                </div>
+            </div>
+            <div class="row sign" >
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="newUserIcon" aria-hidden="true"> <i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" id="newUser" name="newUser" aria-describedby="newUserIcon" type="text" placeholder="选一个昵称">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sign" >
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="pwdIcon" aria-hidden="true"> <i class="glyphicon glyphicon-lock"></i></span>
+                        <input class="form-control" id="pwd" name="pwd" aria-describedby="pwdIcon" type="password" placeholder="输入密码">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row signbtn">
+                <div class="col-md-offset-4 col-md-4">
+                    <button id="subbtn"  class="btn btn-danger btn-lg btn-block" type="button">注&nbsp;&nbsp;册</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <footer>
+    </footer>
+</div>
+
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+
+<script>
+    var e_n,u_n,p_n;//立flag
+    $("#Email").focus(function(){
+        if(e_n!=1){
+        }else{
+            $(this).val("");
+            $(".emailconb").remove();
+            e_n = 0;//判断通过或正修改
+        }
+    }).blur(function(){
+        if(this.value==""|| ( this.value!="" && !/.+@.+\.[a-zA-Z]{2,4}$/.test(this.value) ) ){
+            if($(".emailconb").length){}//若已有提示则不显示
+            else{
+                var errorMsg = '请输入正确的Email地址';
+                $(this).parents('.sign').append(" <div class='col-md-4 emailconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errorMsg+"</h5></div>");
+                e_n = 1;//标记已判断这个input
+            }
+
+        }
+        else{
+            emailAjax(this.value);//异步判断注册否
+
+        }
+    });
+        $("#newUser").focus(function(){
+            if(u_n!=1){
+            }else{
+                $(this).val("");
+                $(".userconb").remove();
+                u_n = 0;
+            }
+        }).blur(function(){
+            if(this.value==""|| ( this.value.length>18 ) ){
+                if($(".userconb").length){}
+                else{
+                    var errorMsg = '用户名在1~18位之间';
+                    $(this).parents('.sign').append(" <div class='col-md-4 userconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errorMsg+"</h5></div>");
+                }
+                u_n = 1;
+            }
+            else{
+                userAjax(this.value);
+            }
+        });
+    $("#pwd").focus(function(){
+        if(p_n!=1){
+        }else{
+            $(this).val("");
+            $(".pwdconb").remove();
+            p_n = 0;
+        }
+    }).blur(function(){
+        if(this.value==""|| ( this.value.length<6 ) ){
+            if($(".pwdconb").length){}
+            else{
+                var errorMsg = '密码至少是6位';
+                $(this).parents('.sign').append(" <div class='col-md-4 pwdconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errorMsg+"</h5></div>");
+            }
+            p_n = 1;
+        }
+        else{
+            p_n = 3;
+        }
+    });
+
+    function emailAjax(emailValue){
+        $.ajax({
+            type:"POST",
+            cache:"ture",
+            url:"../php/EmailCheck.php?t="+ Math.random(),
+            data:{email:emailValue},
+            success:function(data){
+                if(data==1){
+                    e_n = 3;//邮箱未注册
+                }
+                else{
+                    var errormsg = '该邮箱已被注册！';
+                    alert(errormsg);
+                    $(this).parents('.sign').append(" <div class='col-md-4 emailconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errormsg+"</h5></div>");
+                    e_n = 2;
+                }
+            }
+        })
+    }
+    function userAjax(userValue){
+        $.ajax({
+            type:"POST",
+            url:"../php/UserCheck.php?t="+ Math.random(),
+            data:{userValue:userValue},
+            success:function(data){
+                if(data==1){
+                    u_n = 3;//用户名未注册
+                }
+                else{
+                    var errormsg = '该用户名已被注册！';
+                    $(this).parents('.sign').append(" <div class='col-md-4 userconb'><h5 class='text-danger'><i class='glyphicon glyphicon-exclamation-sign'></i> "+errormsg+"</h5></div>");
+                    u_n = 1;
+                }
+            }
+        })
+    }
+    $("#subbtn").click(function() {
+        if (e_n == 3 && u_n == 3 && p_n == 3) {
+            $("form").submit();
+            $(this).disabled = true;
+        }
+        else{
+           alert( '表单验证未通过！');
+           return false;
+        }
+    })
+
+</script>
+</body>
+</html>
