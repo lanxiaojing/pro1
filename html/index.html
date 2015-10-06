@@ -22,9 +22,8 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a id="homepage" href="#">HOME</a></li>
-					<li><a id="signinpage"  href="signIn.html">注册</a></li>
-					<li><a id="signuppage" href="signUp.html">登录</a></li>
+					<li ><a class="specialbtn" id="signUp" href="signUp.html">登录</a></li>
+					<li><a id="signIn" href="signIn.html">注册</a></li>
 				</ul>
 
 			</div>
@@ -36,40 +35,18 @@
 		<div class="row">
 			<div class="col-md-9">
 				<ul id="tabs" class="nav nav-tabs">
-					<li role="presentation" class="active"><a href="#hot" aria-controls="hot" role="tab" data-toggle="tab">热门动态</a></li>
-					<li role="presentation"><a href="#friend" aria-controls="friend" role="tab" data-toggle="tab">好友动态</a></li>
-					<li role="presentation"><a href="#show"aria-controls="show" role="tab" data-toggle="tab">晒美食</a></li>
+					<li role="presentation" class="active"><a href="#hot" id="hottab" aria-controls="hot" role="tab" data-toggle="tab">热门动态</a></li>
+					<li role="presentation"><a href="#friend" id="friendtab" aria-controls="friend" role="tab" data-toggle="tab">好友动态</a></li>
+					<li role="presentation"><a href="#show" aria-controls="show" role="tab" data-toggle="tab">晒美食</a></li>
 					<li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">美食测评</a></li>
 				</ul>
 				<div class="tab-content">
-					<div id="hot" class="tab-pane active" role="tabpanel" style="padding-top: 30px">
-						<div class="media" style="margin: 20px;">
-							<div class="media-left">
-								<a href="#"><img class="img-circle img-responsive" style="width: 50px;height: 50px" src="../img/wallhaven-258823.jpg"></a>
-							</div>
-							<div class="media-body">
-								<div class="media-heading"><a href="#">李小明</a><button type="button" class="btn btn-xs btn-info pull-right">加关注</button></div>
-								<p>人类得了一种越聪明越容易爆炸的病，而我还是一只受精卵的时候已经把自己炸成子宫里的一朵小蘑菇···</p>
-								<div class="center-block">
-									<img style="width: 30%;height:auto;" src="../img/wallhaven-258823.jpg">
-									<img style="width: 30%;height:auto;" src="../img/wallhaven-258823.jpg">
-									<img style="width: 30%;height:auto;" src="../img/wallhaven-258823.jpg"><br/>
-									<img style="width: 30%;height:auto;" src="../img/wallhaven-258823.jpg">
-									<img style="width: 30%;height:auto;" src="../img/wallhaven-258823.jpg">
-									<img style="width: 33%;height:auto;" src="../img/wallhaven-258823.jpg"><br/>
-									<img style="width: 33%;height:auto;" src="../img/wallhaven-258823.jpg">
-									<img style="width: 33%;height:auto;" src="../img/wallhaven-258823.jpg">
-									<img style="width: 33%;height:auto;" src="../img/wallhaven-258823.jpg">
-								</div>
-							</div>
-						</div>
-						<div style="margin: 50px 0px; border: solid grey 1px;opacity: 0.5; height: 1px"></div>
+					<div id="hot" class="tab-pane active" role="tabpanel" style="padding-top: 30px"></div>
+					<div id="friend" class="tab-pane" role="tabpanel"></div>
+					<div id="show" class="tab-pane" role="tabpanel">
+
 					</div>
-
-
-					<div id="friend" class="tab-pane" role="tabpanel">sssssssss</div>
-					<div id="show" class="tab-pane" role="tabpanel">aaaaaaaa</div>
-					<div id="comment" class="tab-pane" role="tabpanel">eeeeeeeeeee</div>
+					<div id="comment" class="tab-pane" role="tabpanel"></div>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -80,18 +57,15 @@
 					</div>
 					<div class="panel-body">
 						<form action="#">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search for...">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
-								</span>
-							</div>
+                            <div class="input-group">
+                                <span class="input-group-addon" aria-hidden="true"><i class="glyphicon glyphicon-search"></i></span>
+                                <input class="form-control" id="searchInput" type="text" placeholder="search for···">
+                            </div>
 						</form>
-						<div class="list-group" style="margin: 20px 0px">
-							<a class="list-group-item">我的收藏<span class="badge">14</span></a>
-							<a class="list-group-item">我关注的人<span class="badge">2</span> </a>
-							<a class="list-group-item">我的粉丝<span class="badge">10</span> </a>
-							<a class="list-group-item">私信<span class="badge">3</span> </a>
+						<div class="list-group" id="userInfoList">
+							<div class="alert alert-info" role="alert">
+								<a href="signIn.html" class="alert-link">&nbsp;&nbsp;登录&nbsp;&nbsp;</a>以查看更多···
+							</div>
 						</div>
 					</div>
 				</div>
@@ -102,77 +76,13 @@
 
 		</footer>
 	</div>
-	
 
 	<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-	<script type="text/javascript">
 
-        function ShowHot(data){
-            //需要的数据
-            var index,
-            html = '';
-            for(i=0;i<data.username.length;i++){
-                html += "<div class='media' style='margin: 20px;'>"
-                + "<div class='media-left'>"
-                + "	<a href='#'><img class='img-circle img-responsive' style='width: 50px;height: 50px' src=''></a>"
-                + "</div>"
-                + "<div class='media-body'>"
-                + "<div class='media-heading'><a href='#'>" +data.username[i]+"</a><button type='button' class='btn btn-xs btn-info pull-right'>加关注</button></div>"
-                + "<p>"+data.word[i]+"</p>"
-                + "<div class='center-block'>"
-                + imgoutput(i)
-                + "</div>"
-                + "</div>"
-                + "</div>"
-                + "<div style='margin: 50px 0px; border: solid grey 1px;opacity: 0.5; height: 1px'></div>";
-            }
-            function imgoutput(i){
-                var p='';
-                if(data.imgurl[i]!=''){
-                    if (data.imgurl[i].indexOf(",") >= 0) {
-                        var imgUrlArr = [];
-                        imgUrlArr =data.imgurl[i].split(",");
-                        for (var j = 0; j < imgUrlArr.length; j++) {
-                            p += "<img style='width: 30%;height:auto;'"+"src="+imgUrlArr[j]+">";//你原来写的这里有个语法错误
-                        }
-                        return p;
-                    }
-                    p="<img style='width: 30%;height:auto;'"+"src="+data.imgurl[i]+">";
-                    return p;
-                }
-              return p;
-            }
-            document.getElementById("hot").innerHTML=html;
-        }
-
-        function HotNewsFunAjax(phpUrl){
-            var xmlhttp;
-            if(window.XMLHttpRequest){
-                xmlhttp=new XMLHttpRequest();
-            }
-            else{
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function(){
-                if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                    var data=xmlhttp.responseText;
-                    //此处data就是返回的值，在这里执行回调函数内容，也就是插入数据到前台页面的操作
-                    //2。接收参数，解析并处理参数格式
-                    data=eval('('+data+')');
-                    //3.利用参数输出
-                    ShowHot(data);
-                }
-            }
-            xmlhttp.open("POST",phpUrl+"?t=" + Math.random(),true);
-            xmlhttp.send();
-            return 1;
-        }
-        var hot=HotNewsFunAjax("../php/HotNews.php");
-
+	<script type="text/javascript" src="../js/index.js"></script>
+	<script>
 
 	</script>
-
 </body>
 </html>
